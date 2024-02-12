@@ -115,11 +115,11 @@
             reader.onload = function(){
                 const url = this.result
                 const urlSplit = url.split('base64,')[1]
-                navigator.clipboard.writeText("http://localhost:3000/html/code="+urlSplit).then(function(){
+                navigator.clipboard.writeText("https://nodecodeeditor.onrender.com/html/code="+urlSplit).then(function(){
                     alert("link panoya kopyalandı!")
                 })
                 .catch(function(){
-                    alert("link panoya kopyalanamadı!\eyer url yi almak istiyorsanız link: "+"http://localhost:3000/html/code="+urlSplit)
+                    alert("link panoya kopyalanamadı!\eyer url yi almak istiyorsanız link: "+"https://nodecodeeditor.onrender.com/html/code="+urlSplit)
                 })
             }
             reader.readAsDataURL(blob)
