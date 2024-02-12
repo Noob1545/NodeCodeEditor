@@ -1,0 +1,34 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node Code Editor - geri bildirim başarılı!</title>
+</head>
+<body>
+    <div id="MainDiv">
+        <h1>Geri bildirim gönderildi!</h1>
+        <h2>geri bildirim gönderildi, geri dönüşümüzü email üzerinden atıcağız.</h2>
+        <h3 id="sayac">3 saniye içerisinde ana sayfaya yönlendirilecek.</h3>
+    </div>
+    <style>
+        body{
+            font-family: Arial;
+        }
+        #MainDiv{
+            text-align: center;
+        }
+    </style>
+    <script>
+        const sayac = document.getElementById("sayac")
+        let saniye = 3
+        setInterval(function(){
+            if(0 >= saniye){
+                window.location.href = "http://localhost:3000"
+            }
+            else{
+                saniye--
+                sayac.textContent = ` ${saniye} saniye içerisinde ana sayfaya yönlendirilecek.`
+            }
+        },1000)
+    </script>
+</body>
+</html>

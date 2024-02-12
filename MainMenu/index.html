@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node Code Editor</title>
+</head>
+<body style="font-family: Arial, Helvetica, sans-serif;background-color:  #2C3E50">
+    <div id="baskikDiv">
+        <h1 id="baslik">Node Code Editor</h1>
+    </div>
+
+    <div id="codeDiv">
+        <button id="jsButton">JavaScript Editor</button>
+        <button id="htmlButton">HTML Editor</button>
+        <br>
+        <br>
+        <input type="text" id="sendURL" placeholder="bir Node Code Editor code URL sinemi sahipsin? URL yi buraya yazabilirsin!">
+        <button id="sendURLButton">Git</button>
+    </div>
+
+    <div id="anlatimDiv">
+        <span>
+            <h2>Node Code Editor nedir?</h2>
+            Node Code Editor, Node.js tabanlı bir kod düzenleyiciyi temsil etmektedir. 
+            JavaScript ve HTML kodlarını düzenlemek için iki farklı düzenleyiciye sahiptir.
+            JavaScript Editor ve HTML Editor butonları aracılığıyla her iki düzenleyiciyi de görüntüleyebilirsiniz.
+            Düzenleme işleminden sonra kodunuzu kaydedebilir veya kopyalayabilirsiniz.
+        </span>
+    </div>
+    <style>
+        #baskikDiv {
+            text-align: center;
+            margin-left: 10px; /* Örnek için boşluk bırakıyoruz */
+        }
+
+        #baslik {
+            opacity: 0;
+            position: relative;
+            margin-left: 10px;
+            animation: baslikMotion 1s ease forwards;
+        }
+
+        #codeDiv{
+            text-align: center;
+            margin-top: 10px;
+            animation: JavaScriptMotion 2s ease forwards;
+            user-select: none;
+        }
+
+        #jsButton{
+            transition: all 0.3s ease;
+            position: relative;
+            margin-top: 100px;
+            padding: 20px;
+            cursor: pointer;
+            font-size: large;
+            background-color: yellow;
+            border-color: yellow;
+            border-radius: 5px;
+        }
+
+        #jsButton:hover{
+            transition: all 0.3s ease;
+            background-color: white;
+        }
+
+        #htmlButton{
+            transition: all 0.3s ease;
+            position: relative;
+            margin-top: 100px;
+            padding: 20px;
+            cursor: pointer;
+            font-size: large;
+            background-color: orangered;
+            border-color: orangered;
+            border-radius: 5px;
+        }
+
+        #htmlButton:hover{
+            transition: all 0.3s ease;
+            background-color: white;
+        }
+
+
+        #anlatimDiv{
+            margin-top: 100px;
+            opacity: 0;
+            font-size: large;
+            width: 500px;
+            animation: anlatimDivMotion 2s ease forwards;
+        }
+
+        #sendURL{
+            width: 510px;
+            padding: 10px;
+            font-size: 15px;
+        }
+
+        #sendURLButton{
+            padding: 11px;
+            font-size: medium;
+            cursor: pointer;
+        }
+        @keyframes baslikMotion {
+            from {
+                opacity: 0;
+                margin-left: -450px;
+            }
+            to {
+                opacity: 1;
+                margin-left: 0;
+            }   
+        }
+
+        @keyframes JavaScriptMotion{
+            from{
+                opacity: 0;
+                margin-top: 170px;
+            }
+
+            to{
+                opacity: 1;
+                margin-top: 0px;
+            }
+        }
+
+        @keyframes anlatimDivMotion{
+            form{
+                opacity: 0;
+                margin-top: 80px;
+            }
+
+            to{
+                opacity: 1;
+                margin-top: 100px;
+            }
+        }
+    </style>
+    <script>
+        document.getElementById("jsButton").onclick = function(){
+            window.location.href = "http://localhost:3000/javascript"
+        }
+
+        document.getElementById("htmlButton").onclick = function(){
+            window.location.href = "http://localhost:3000/html"
+        }
+
+        document.getElementById("sendURLButton").onclick = function(){
+            const codeURL = document.getElementById("sendURL").value
+            if(codeURL.startsWith("http://localhost:3000/javascript/code=")){
+                async function kontrol(){
+                    const splitValue = codeURL.split('http://localhost:3000/javascript/code=')[1].toString()
+                    const fetchData = await fetch(`http://localhost:3000/javascript/code=${splitValue}`)
+                    const response = await fetchData.text()
+                    console.log(response);
+                    if(response.split('\n')[4] == "<title>NodeCodeEditor sayfa bulunamadı!</title>"){
+                        alert("girdiğiniz URL, bir Node Code Editor code URL si değil!")
+                    }
+                    else{
+                        window.location.href = codeURL
+                    }
+                }
+                kontrol()
+            }
+
+            else if(codeURL.startsWith("http://localhost:3000/html/code=")){
+                async function kontrol(){
+                    const splitValue = codeURL.split('http://localhost:3000/html/code=')[1].toString()
+                    const fetchData = await fetch(`http://localhost:3000/html/code=${splitValue}`)
+                    const response = await fetchData.text()
+                    console.log(response);
+                    if(response.split('\n')[4] == "<title>NodeCodeEditor sayfa bulunamadı!</title>"){
+                        alert("girdiğiniz URL, bir Node Code Editor code URL si değil!")
+                    }
+                    else{
+                        window.location.href = codeURL
+                    }
+                }
+                kontrol()
+            }
+
+            else{
+                alert('girdiğiniz URL, bir Node Code Editor code URL si değil!')
+            }
+        }
+    </script>
+</body>
+</html>

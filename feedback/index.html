@@ -1,0 +1,78 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node Code Editor - geri bildirim</title>
+</head>
+<body>
+    <div id="MainDiv">
+        <h1>Geri bildirim gönderin</h1>
+        <form action="/feedbackdata" method="post">
+            <input type="text" placeholder="adınızı yazın" id="getName" name="name">
+            <input type="text" placeholder="soy adınızı yazın" id="getSurName" name='surName'>
+            <br>
+            <br>
+            <input type="email" id="getEmail" placeholder="size eposta aracılığı ile cevap göndereceğiz, lütfen mail adresinizi yazın." name="emailAdress" required>
+            <br>
+            <br>
+            <span>bize neden geri bildirim göndermek istiyorsun?</span>
+            <br>
+            <br>
+            <select id="select">
+                <option value="defaultValue">bir değer seçin</option>
+                <option value="hata">hata</option>
+                <option value="oneri">öneri</option>
+                <option value="katilma">sizinle çalışmak istiyorum</option>
+            </select>
+            <br>
+            <br>
+            <textarea id="mesaj" placeholder="bize göndereceğin mesajı yaz." cols="35" rows="5" name="message"></textarea>
+            <br>
+            <br>
+            <button id="sumbitButton" disabled>Gönder</button>
+            <br>
+            <input type="text" name="selectValue" style="display: none;">
+        </form>
+    </div>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        #MainDiv{
+            text-align: center;
+        }
+        input{
+            width: 250px;
+            padding: 5px;
+            border: 1px solid black;
+            border-radius: 5px;
+        }
+        #getEmail{
+            width: 500px;
+        }
+        #sumbitButton{
+            cursor: not-allowed;
+        }
+    </style>
+    <script>
+        setInterval(function(){
+            const getNameValue = document.getElementById("getName").value
+            const getSurNameValue = document.getElementById("getSurName").value
+            const getEmailValue = document.getElementById("getEmail").value
+            const getSelectValue = document.getElementById("select").value
+            const getTextAreaValue = document.getElementById("mesaj").value
+            const sumbitButton = document.getElementById("sumbitButton")
+            if((getNameValue.length >= 2 && isNaN(getNameValue)) && (getSurNameValue.length >= 4 && isNaN(getSurNameValue)) && (getEmailValue.trim() !== "" && getEmailValue.includes("@") && getEmailValue.split('@')[0].toString().length >= 3 && getEmailValue.endsWith(".com") && getEmailValue.substring(getEmailValue.indexOf('@')+1,getEmailValue.indexOf(".com")).length>=4) && getSelectValue !== "defaultValue" && (getTextAreaValue.length > 3 && getTextAreaValue.trim() !== "")){
+                sumbitButton.disabled = false
+                sumbitButton.style.cursor = "pointer"
+            }
+            else{
+                sumbitButton.disabled = true
+                sumbitButton.style.cursor = "not-allowed"
+            }
+
+            document.getElementsByName("selectValue")[0].value = getSelectValue
+        })
+    </script>
+</body>
+</html>
