@@ -170,10 +170,10 @@
 
         document.getElementById("sendURLButton").onclick = function(){
             const codeURL = document.getElementById("sendURL").value
-            if(codeURL.startsWith("http://localhost:3000/javascript/code=")){
+            if(codeURL.startsWith("https://nodecodeeditor.onrender.com/javascript/code=")){
                 async function kontrol(){
-                    const splitValue = codeURL.split('http://localhost:3000/javascript/code=')[1].toString()
-                    const fetchData = await fetch(`http://localhost:3000/javascript/code=${splitValue}`)
+                    const splitValue = codeURL.split('https://nodecodeeditor.onrender.com/javascript/code=')[1].toString()
+                    const fetchData = await fetch(`https://nodecodeeditor.onrender.com/javascript/code=${splitValue}`)
                     const response = await fetchData.text()
                     console.log(response);
                     if(response.split('\n')[4] == "<title>NodeCodeEditor sayfa bulunamadı!</title>"){
@@ -186,10 +186,10 @@
                 kontrol()
             }
 
-            else if(codeURL.startsWith("http://localhost:3000/html/code=")){
+            else if(codeURL.startsWith("https://nodecodeeditor.onrender.com/html/code=")){
                 async function kontrol(){
-                    const splitValue = codeURL.split('http://localhost:3000/html/code=')[1].toString()
-                    const fetchData = await fetch(`http://localhost:3000/html/code=${splitValue}`)
+                    const splitValue = codeURL.split('https://nodecodeeditor.onrender.com/html/code=')[1].toString()
+                    const fetchData = await fetch(`https://nodecodeeditor.onrender.com/html/code=${splitValue}`)
                     const response = await fetchData.text()
                     console.log(response);
                     if(response.split('\n')[4] == "<title>NodeCodeEditor sayfa bulunamadı!</title>"){
@@ -208,7 +208,7 @@
         }
 
         document.getElementById("feedbackButton").onclick = function(){
-            window.location.href = "http://localhost:3000/feedback"
+            window.location.href = "https://nodecodeeditor.onrender.com/feedback"
         }
     </script>
 </body>
