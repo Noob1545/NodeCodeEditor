@@ -27,7 +27,7 @@ app.get("/feedback",function(request,response){
     response.sendFile(__dirname+"/feedback/index.html")
 })
 
-app.use(express.urlencoded({ extended: true }));
+
 app.post('/feedbackdata', (request, response) => {
     const data = {
         "ad":request.body.name,
